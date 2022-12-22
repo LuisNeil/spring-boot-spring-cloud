@@ -22,6 +22,9 @@ public class Product implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date createAt;
 
+    @Transient
+    private Integer port;
+
     public Long getId() {
         return id;
     }
@@ -52,6 +55,14 @@ public class Product implements Serializable {
 
     public void setCreateAt(Date createdAt) {
         this.createAt = createdAt;
+    }
+
+    public Integer getPort() {
+        return port;
+    }
+
+    public void setPort(Integer port) {
+        this.port = port;
     }
 
     private static final long serialVersionUID = 3786075292323400213L;
