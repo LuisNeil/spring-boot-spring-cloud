@@ -3,7 +3,6 @@ package com.formacionbdi.springboot.app.items.models.service;
 import com.formacionbdi.springboot.app.items.clients.ProductRestClient;
 import com.formacionbdi.springboot.app.items.models.Item;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

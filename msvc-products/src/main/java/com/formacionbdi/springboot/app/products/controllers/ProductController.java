@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @RestController
@@ -34,7 +35,15 @@ public class ProductController {
     }
 
     @GetMapping("/list/{id}")
-    public Product detail(@PathVariable Long id){
+    public Product detail(@PathVariable Long id) throws InterruptedException {
+        if(id.equals(10L)){
+            throw new IllegalStateException("Product Not Found");
+        }
+
+        if(id.equals(7L)){
+            TimeUnit.SECONDS.sleep(5L);
+        }
+
         Product product = service.findById(id);
         //product.setPort(Integer.valueOf(env.getProperty("local.server.port")));
         product.setPort(port);
