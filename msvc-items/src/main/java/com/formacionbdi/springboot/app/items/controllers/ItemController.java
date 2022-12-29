@@ -3,6 +3,8 @@ package com.formacionbdi.springboot.app.items.controllers;
 import com.formacionbdi.springboot.app.items.models.Item;
 import com.formacionbdi.springboot.app.items.models.Product;
 import com.formacionbdi.springboot.app.items.models.service.ItemService;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.timelimiter.annotation.TimeLimiter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 @RestController
 public class ItemController {
@@ -37,6 +40,19 @@ public class ItemController {
         return cbFactory.create("items").run(()->service.findById(id, quantity), e -> metodoAlternativo(id, quantity, e));
     }
 
+    @CircuitBreaker(name = "items", fallbackMethod = "metodoAlternativo")
+    @GetMapping("/list2/{id}/quantity/{quantity}")
+    public Item detail2(@PathVariable Long id, @PathVariable Integer quantity){
+        return service.findById(id, quantity);
+    }
+
+    @CircuitBreaker(name = "items", fallbackMethod = "metodoAlternativo2")
+    @TimeLimiter(name = "items")
+    @GetMapping("/list3/{id}/quantity/{quantity}")
+    public CompletableFuture<Item> detail3(@PathVariable Long id, @PathVariable Integer quantity){
+        return CompletableFuture.supplyAsync(() -> service.findById(id, quantity));
+    }
+
     private Item metodoAlternativo(Long id, Integer quantity, Throwable e) {
         logger.info(e.getMessage());
         Item item = new Item();
@@ -48,5 +64,18 @@ public class ItemController {
         product.setPrice(500.00);
         item.setProduct(product);
         return item;
+    }
+
+    private CompletableFuture<Item> metodoAlternativo2(Long id, Integer quantity, Throwable e) {
+        logger.info(e.getMessage());
+        Item item = new Item();
+        Product product = new Product();
+
+        item.setQuantity(quantity);
+        product.setId(id);
+        product.setName("Camara Sony");
+        product.setPrice(500.00);
+        item.setProduct(product);
+        return CompletableFuture.supplyAsync(() -> item);
     }
 }
