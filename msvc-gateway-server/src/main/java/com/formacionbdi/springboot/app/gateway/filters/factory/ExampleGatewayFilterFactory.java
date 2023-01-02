@@ -8,6 +8,8 @@ import org.springframework.http.ResponseCookie;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -16,8 +18,7 @@ public class ExampleGatewayFilterFactory extends AbstractGatewayFilterFactory<Ex
     private final Logger logger = LoggerFactory.getLogger(ExampleGatewayFilterFactory.class);
 
     public ExampleGatewayFilterFactory() {
-        super(Configuracion.class
-        );
+        super(Configuracion.class);
     }
 
     @Override
@@ -32,6 +33,16 @@ public class ExampleGatewayFilterFactory extends AbstractGatewayFilterFactory<Ex
                 logger.info("Executing pre gateway filter factory: " + config.message);
             }));
         });
+    }
+
+    @Override
+    public String name() {
+        return "ExampleCookie";
+    }
+
+    @Override
+    public List<String> shortcutFieldOrder() {
+        return Arrays.asList("message", "cookieName", "cookieValue");
     }
 
     public static class Configuracion {

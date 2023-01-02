@@ -1,3 +1,24 @@
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        sliding-window-size: 6
+        failure-rate-threshold: 50
+        wait-duration-in-open-state: 20s
+        permitted-number-of-calls-in-half-open-state: 4
+        slow-call-rate-threshold: 50
+        slow-call-duration-threshold: 2s
+    instances:
+      products:
+        base-config: default
+  timelimiter:
+    configs:
+      default:
+        timeout-duration: 2s
+    instances:
+      products:
+        base-config: default
+
 spring:
   cloud:
     gateway:
@@ -7,12 +28,9 @@ spring:
           predicates:
             - Path=/api/products/**
           filters:
+            - ExampleCookie=Hello my personalized message, user, LuisTejeda
+            - CircuitBreaker=products
             - StripPrefix=2
-            - name: Example
-              args:
-                message: Hello my personalized message
-                cookieName: user
-                cookieValue: LuisTejeda
         - id: mscv-items
           uri: lb://msvc-items
           predicates:
