@@ -2,9 +2,10 @@ package com.formacionbdi.springboot.app.items.models.service;
 
 import com.formacionbdi.springboot.app.items.clients.ProductRestClient;
 import com.formacionbdi.springboot.app.items.models.Item;
-import com.formacionbdi.springboot.app.items.models.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.formacionbdi.springboot.app.commons.models.entity.Product;
+
 
 import java.util.List;
 import java.util.stream.Collectors;

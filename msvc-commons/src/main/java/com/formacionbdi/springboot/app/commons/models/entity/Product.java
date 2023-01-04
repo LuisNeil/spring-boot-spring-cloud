@@ -1,12 +1,24 @@
-package com.formacionbdi.springboot.app.items.models;
+package com.formacionbdi.springboot.app.commons.models.entity;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
-public class Product {
+@Entity
+@Table(name = "products")
+public class Product implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
     private Double price;
+
+    @Column(name = "create_at")
+    @Temporal(TemporalType.DATE)
     private Date createAt;
+
+    @Transient
     private Integer port;
 
     public Long getId() {
@@ -37,8 +49,8 @@ public class Product {
         return createAt;
     }
 
-    public void setCreateAt(Date createAt) {
-        this.createAt = createAt;
+    public void setCreateAt(Date createdAt) {
+        this.createAt = createdAt;
     }
 
     public Integer getPort() {
@@ -48,4 +60,6 @@ public class Product {
     public void setPort(Integer port) {
         this.port = port;
     }
+
+    private static final long serialVersionUID = 3786075292323400213L;
 }

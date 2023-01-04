@@ -1,6 +1,6 @@
 package com.formacionbdi.springboot.app.products.controllers;
 
-import com.formacionbdi.springboot.app.products.models.entity.Product;
+import com.formacionbdi.springboot.app.commons.models.entity.Product;
 import com.formacionbdi.springboot.app.products.models.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

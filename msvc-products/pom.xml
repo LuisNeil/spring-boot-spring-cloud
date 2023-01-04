@@ -52,6 +52,11 @@
 			<artifactId>spring-cloud-starter-openfeign</artifactId>
 			<version>3.1.5</version>
 		</dependency>
+		<dependency>
+			<groupId>com.formacionbdi.springboot.app.commons</groupId>
+			<artifactId>msvc-commons</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 
 	</dependencies>
 	<dependencyManagement>

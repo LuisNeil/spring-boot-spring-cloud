@@ -1,6 +1,8 @@
 package com.formacionbdi.springboot.app.items.models;
 
 import java.util.Date;
+import com.formacionbdi.springboot.app.commons.models.entity.Product;
+
 
 public class Item {
 

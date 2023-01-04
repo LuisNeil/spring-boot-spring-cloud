@@ -1,6 +1,6 @@
 package com.formacionbdi.springboot.app.products.models.service;
 
-import com.formacionbdi.springboot.app.products.models.entity.Product;
+import com.formacionbdi.springboot.app.commons.models.entity.Product;
 import com.formacionbdi.springboot.app.products.models.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

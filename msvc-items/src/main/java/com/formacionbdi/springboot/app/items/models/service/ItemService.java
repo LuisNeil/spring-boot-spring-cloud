@@ -1,7 +1,8 @@
 package com.formacionbdi.springboot.app.items.models.service;
 
 import com.formacionbdi.springboot.app.items.models.Item;
-import com.formacionbdi.springboot.app.items.models.Product;
+import com.formacionbdi.springboot.app.commons.models.entity.Product;
+
 
 import java.util.List;
 
