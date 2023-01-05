@@ -31,9 +31,15 @@ spring:
             - ExampleCookie=Hello my personalized message, user, LuisTejeda
             - CircuitBreaker=products
             - StripPrefix=2
-        - id: mscv-items
+        - id: msvc-items
           uri: lb://msvc-items
           predicates:
             - Path=/api/items/**
+          filters:
+            - StripPrefix=2
+        - id: msvc-users
+          uri: lb://msvc-users
+          predicates:
+            - Path=/api/users/**
           filters:
             - StripPrefix=2

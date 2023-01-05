@@ -1,4 +1,4 @@
-package com.formacionbdi.springboot.app.users.models.entity;
+package com.formacionbdi.springboot.app.commons.users.models.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
